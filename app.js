@@ -1,16 +1,11 @@
 const express = require('express');
+const path = require('path');
+const PORT = process.env.PORT || 5000
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname+"/index.html");
-});
-
-const port = 5000 || PROCESS.env.PORT;
-app.listen(port, (err) => {
-  if (err) {
-    throw err;
-  } else {
-    console.log('server on port ' + port);
-  }
-});
+app
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
