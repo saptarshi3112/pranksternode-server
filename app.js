@@ -2,12 +2,11 @@ const express = require('express');
 
 const app = express();
 
-const port = 5000 || PROCESS.env.PORT;
-
 app.get('/', (req, res) => {
-  res.send('HELLO world');
+  res.sendFile(__dirname+"/index.html");
 });
 
+const port = 5000 || PROCESS.env.PORT;
 app.listen(port, (err) => {
   if (err) {
     throw err;
