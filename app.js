@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cors());
 
 const nexmo = new Nexmo({
@@ -37,7 +37,7 @@ app.get('/userRouter/:number', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'))
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 app
