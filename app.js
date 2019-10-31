@@ -23,17 +23,23 @@ const ncco = [{
   text: 'This is a text-to-speech test message.',
 }];
 
-app.get('/userRouter/:number', (req, res) => {
+app.get('/userRouter/:number/:repeater', (req, res) => {
   console.log('call');
-  const number = req.params.number;
-  nexmo.calls.create({
-      to: [{ type: 'phone', number: number }],
-      from: { type: 'phone', number: '919748849146' },
-      ncco,
-    }, (err, result) => {
-      res.json(err || result);
-    },
-  );
+  const number = req.params.number, repeater = req.params.repeater;
+
+  for (let i = 0; i < repeater; i++) {
+    nexmo.calls.create({
+        to: [{ type: 'phone', number: number }],
+        from: { type: 'phone', number: '919748849146' },
+        ncco,
+      }, (err, result) => {
+        console.log(err || result);
+      },
+    );
+  }
+
+  res.json('Called User');
+
 });
 
 app.get('*', (req, res) => {

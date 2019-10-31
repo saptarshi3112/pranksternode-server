@@ -22,7 +22,8 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			number: ''
+			number: '',
+			repeater: ''
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -38,8 +39,9 @@ class Home extends Component {
 	}
 
 	callUser(e) {
+		console.log(this.state);
 		e.preventDefault();
-		this.props.callUser(this.state.number);
+		this.props.callUser(this.state.number, this.state.repeater);
 	}
 
 	render() {
@@ -55,6 +57,18 @@ class Home extends Component {
 											<Form.Label>Mobile</Form.Label>
 											<Form.Control name="number" onChange={this.onChange} />
 										</Form.Group>
+										<Form.Group controlId="exampleForm.ControlSelect1">
+									    <Form.Label>Repeater</Form.Label>
+									    <Form.Control name="repeater" onChange={this.onChange} as="select">
+									      <option>1</option>
+												<option>2</option>
+												<option>5</option>
+									      <option>10</option>
+									      <option>20</option>
+									      <option>50</option>
+									      <option>100</option>
+									    </Form.Control>
+									  </Form.Group>
 										<Form.Group>
 											<Button onClick={this.callUser} size="sm" variant="dark">Call</Button>
 										</Form.Group>

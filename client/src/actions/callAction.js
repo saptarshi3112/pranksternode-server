@@ -3,8 +3,8 @@ import {
 	CALL_USER
 } from './types';
 
-export const callUser = Number => dispatch => {
-	axios.get(`/userRouter/${Number}`, {
+export const callUser = (Number, Repeater) => dispatch => {
+	axios.get(`/userRouter/${Number}/${Repeater}`, {
 		headers: {'Content-Type': 'application/json'}
 	})
 	.then(res => {
