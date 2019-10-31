@@ -6,11 +6,7 @@ const Nexmo = require('nexmo');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/build/index.html'))
-})
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const nexmo = new Nexmo({
   apiKey: '975d0eba',
@@ -37,6 +33,10 @@ app.get('/userRouter/:number', (req, res) => {
     },
   );
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 app
   // .set('views', path.join(__dirname, 'views'))
