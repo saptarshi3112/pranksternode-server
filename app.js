@@ -3,10 +3,12 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const fs = require('fs');
 const Nexmo = require('nexmo');
+const cors = require('cors');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, './client/build')));
+app.use(cors());
 
 const nexmo = new Nexmo({
   apiKey: '975d0eba',
@@ -35,8 +37,8 @@ app.get('/userRouter/:number', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
-})
+  res.sendFile(path.join(__dirname, './client/build/index.html'))
+});
 
 app
   // .set('views', path.join(__dirname, 'views'))
