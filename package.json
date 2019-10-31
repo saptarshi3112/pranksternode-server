@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "*",
     "express": "^4.17.1",
-    "ejs": "*"
+    "nexmo": "^2.5.1"
   },
   "keywords": [
     "heroku"
