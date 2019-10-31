@@ -4,6 +4,12 @@ const PORT = process.env.PORT || 5000
 
 const app = express();
 
+app.get('/userRouter', (req, res) => {
+  res.json({
+    message: 'hey bubau'
+  });
+});
+
 app
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
