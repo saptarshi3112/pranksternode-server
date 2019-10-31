@@ -1,12 +1,16 @@
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
-
 const fs = require('fs');
-
 const Nexmo = require('nexmo');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/index.html'))
+})
 
 const nexmo = new Nexmo({
   apiKey: '975d0eba',
@@ -15,16 +19,14 @@ const nexmo = new Nexmo({
   privateKey: fs.readFileSync('private.key')
 });
 
-const ncco = [
-  {
-    action: 'talk',
-    voiceName: 'Joey',
-    text:
-      'This is a text-to-speech test message.',
-  },
-];
+const ncco = [{
+  action: 'talk',
+  voiceName: 'Aditi',
+  text: 'This is a text-to-speech test message.',
+}];
 
 app.get('/userRouter/:number', (req, res) => {
+  console.log('call');
   const number = req.params.number;
   nexmo.calls.create({
       to: [{ type: 'phone', number: number }],
@@ -37,7 +39,7 @@ app.get('/userRouter/:number', (req, res) => {
 });
 
 app
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
+  // .set('views', path.join(__dirname, 'views'))
+  // .set('view engine', 'ejs')
+  // .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
